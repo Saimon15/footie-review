@@ -16,6 +16,10 @@ const io = socketIO(server);
 io.on('connection', (socket) => {
   console.log('Client connected');
   socket.on('disconnect', () => console.log('Client disconnected'));
+ socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+    console.log('message: '+msg);
+  });
 });
 
-setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
+//setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
